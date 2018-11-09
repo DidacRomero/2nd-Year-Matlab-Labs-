@@ -6,7 +6,7 @@
 %   - Ensure that the transpose operation is equivalent to the inverse
 %   - Observe what happens to a vector parallel to the axis direction
 %   - Observe what happens to a vector perpendicular to the axis direction
-
+ %A = AxisAngleToMatrix([1 2 3], (pi / 2));
 %% Exercise 2
 % Use the past function and the function Cubeplot/Cubeplot2 to transform the
 % orientation of the cube given by M
