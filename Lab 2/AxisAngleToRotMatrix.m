@@ -8,9 +8,9 @@ function RotMatrix = AxisAngleToRotMatrix(axis_u,angle)
 if nargin<1
     axis_u = [1 0 0];
     angle = pi/2;
-    disp('Not enough parameters passed!');
+    disp('Not enough parameters passed! axis_u =[1 0 0] and angle pi/2 will be passed by default');
 else if nargin<2
-        disp('Provide an angle please');
+        disp('Provide an angle please, pi/2 will be provided by default');
         angle = pi/2;
 else
     flag = 0;
@@ -23,26 +23,13 @@ else
     if(angle > 2*angle)
         disp('Warning you must provide the angle in RADIANS use degtorad from Matlab if you want'); 
     end
+    end
 
-
-
-
-
-
+if flag == 0
+    axis_u = reshape(axis_u / norm(axis_u), [3,1]);
+    axis_ux = [0             -axis_u(3,1)   axis_u(2,1);
+               axis_u(3,1)         0       -axis_u(1,1);
+               -axis_u(2,1)   axis_u(1,1)       0;] 
+     RotMatrix = eye(3)*cos(angle)+((1-cos(angle))*(axis_u * axis_u'))+ axis_ux*sin(angle);
 end
-
-
-axis_u = reshape(axis_u / norm(axis_u), [3,1]);
-
-
-
-
-
-
-    
-    
-    
-    
-    
-    Rotmatrix = 1;
 end

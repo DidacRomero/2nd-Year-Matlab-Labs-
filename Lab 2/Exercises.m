@@ -27,9 +27,10 @@ M = [    -1  -1 1;   %Node 1
     -1   1 -1;  %Node 6
     1   1 -1;  %Node 7
     1  -1 -1]'; %Node 8
-
+R = AxisAngleToRotMatrix([1 2 3;],pi/2);
+N = R * M;
 % Call to Cubeplot
-Cubeplot(M);
+Cubeplot(N');
 
 %% Exercise 3
 % Create a function that implements the quaternion multiplication.
