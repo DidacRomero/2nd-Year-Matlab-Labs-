@@ -4,6 +4,7 @@ function RotMatrix = AxisAngleToRotMatrix(axis_u,angle)
     %   -Basically this function uses the Rodrigues Formula to return the
     %   Rotation matrix
 
+angle = deg2rad(angle);
 
 if nargin<1
     axis_u = [1 0 0];
