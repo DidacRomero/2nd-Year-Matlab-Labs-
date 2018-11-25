@@ -27,7 +27,7 @@ M = [    -1  -1 1;   %Node 1
     -1   1 -1;  %Node 6
     1   1 -1;  %Node 7
     1  -1 -1]'; %Node 8
-R = AxisAngleToRotMatrix([1 2 3],90);
+R = AxisAngleToRotMatrix([1 0 0],90);
 N = R * M;
 % Call to Cubeplot
 Cubeplot(N');

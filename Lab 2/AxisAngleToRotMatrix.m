@@ -1,5 +1,5 @@
 function RotMatrix = AxisAngleToRotMatrix(axis_u,angle)
-    %This function receives an axis and an angle provided in RADIANS and
+    %This function receives an axis and an angle provided in DEGREES and
     %returns the ROTATION MATRIX
     %   -Basically this function uses the Rodrigues Formula to return the
     %   Rotation matrix
@@ -8,11 +8,11 @@ angle = deg2rad(angle);
 
 if nargin<1
     axis_u = [1 0 0];
-    angle = pi/2;
-    disp('Not enough parameters passed! axis_u =[1 0 0] and angle pi/2 will be passed by default');
+    angle = deg2rad(90);
+    disp('Not enough parameters passed! axis_u =[1 0 0] and angle 90º will be passed by default');
 else if nargin<2
-        disp('Provide an angle please, pi/2 will be provided by default');
-        angle = pi/2;
+        disp('Provide an angle please, 90º degrees will be provided by default');
+        angle = deg2rad(90);
 else
     flag = 0;
     
