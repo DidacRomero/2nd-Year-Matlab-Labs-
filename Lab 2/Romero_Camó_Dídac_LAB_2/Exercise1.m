@@ -7,18 +7,8 @@
 %   - Observe what happens to a vector parallel to the axis direction
 %   - Observe what happens to a vector perpendicular to the axis direction
 
-%Matrix we will be using
-M = [    -1  -1 1;   %Node 1
-    -1   1 1;   %Node 2
-    1   1 1;   %Node 3
-    1  -1 1;   %Node 4
-    -1  -1 -1;  %Node 5
-    -1   1 -1;  %Node 6
-    1   1 -1;  %Node 7
-    1  -1 -1]'; %Node 8
-%Calculate the rotation using 
-R = AxisAngleToRotMatrix([1 2 3],90);
-%N will be our rotataMatrix
-N = R * M;
-
-testFlag = ex1Tests(N,vecToTest,axisVec,90);
+%Calculate the rotation using Rodrigues
+R = AxisAngleToRotMatrix([1 0 0],90);
+%Make the necessary tests
+vecForTest = [1 0 0];
+testFlag = ex1Tests(R,vecForTest,[1 0 0],90);
