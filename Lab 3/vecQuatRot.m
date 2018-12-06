@@ -27,6 +27,7 @@ conj_quat_vec = [-quat(2) -quat(3) -quat(4)];
 conj_quat = [quat(:,1) conj_quat_vec];
 
 %Calculate the vector that will be RETURNED
-rot_vec = quatMultiplication(quatMultiplication(quat,vec_quat),conj_quat); 
+rot_vec_quat = quatMultiplication(quatMultiplication(quat,vec_quat),conj_quat);
+rot_vec = [rot_vec_quat(:,2) rot_vec_quat(:,3) rot_vec_quat(:,4)];
 end
 end
