@@ -39,16 +39,23 @@ testMat = AxisAngleToRotMatrix([0 1 0],90);
 % *  Given a rotation matrix, returns the Euler rotation angles.
 [roll,pitch,yaw] = matRotToEulerAngles(testMat);
 % *  Given a rotation matrix, returns the principal Euler axis/angle.
+[euler_axis,angle] = rotMatToEulerAxisAngle(testMat);
 % *  Given principal Euler axis/angle, returns the quaternion.
+quatTest3 = eulerAxisAngleToQuaternion(euler_axis,angle);
 % *  Given a quaternion, returns the principal Euler axis/angle.
+[test_euler_axis,test_angle] = quaternionToEulerAxisAngle(quatTest3);
 % *  Given principal Euler axis/angle, returns the rotation vector.
+rotationVector = eulerAxisAngleToRotationVector(euler_axis,angle);
 % *  Given the rotation vector, returns principal Euler axis/angle.
-%
+[lastTestAxis,lastTestAngle] = rotationVectorToEulerAxisAngle(rotationVector);
+
 % Check the past functions and the function Cubeplot/Cubeplot2 to transform the
 % orientation of the cube given by M
 
+RM =  AxisAngleToRotMatrix(test_euler_axis,test_angle);
+M = RM*M;
+Cub
 
-[euler_axis,angle] = rotMatToEulerAxisAngle(testMat);
 %
 %% Exercise 2
 % Create a function that:
