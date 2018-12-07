@@ -68,4 +68,4 @@ rotationVector = eulerAxisAngleToRotationVector(euler_axis,angle);
 % Hint: use a letter 'r,e,p,q,v' to inform the function which are the
 %       input arguments. 
 %
-[ex2Test_rot_mat,ex2Test_roll,ex2Test_pitch,ex2Test_yaw,ex2Test_euler_axis,ex2Test_angle,ex2Test_quat,ex2Test_rot_vec] = exercise2(rotationVector);
+[ex2Test_rot_mat,ex2Test_roll,ex2Test_pitch,ex2Test_yaw,ex2Test_euler_axis,ex2Test_angle,ex2Test_quat,ex2Test_rot_vec] = exercise2(test_euler_axis,test_angle);
