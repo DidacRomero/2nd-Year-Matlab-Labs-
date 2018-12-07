@@ -51,10 +51,10 @@ rotationVector = eulerAxisAngleToRotationVector(euler_axis,angle);
 
 % Check the past functions and the function Cubeplot/Cubeplot2 to transform the
 % orientation of the cube given by M
-Cubeplot(M');
-RM =  AxisAngleToRotMatrix(euler_axis,rad2deg(angle));
-M = RM*M;
-Cubeplot(M');
+% Cubeplot(M');
+% RM =  AxisAngleToRotMatrix(euler_axis,rad2deg(angle));
+% M = RM*M;
+% Cubeplot(M');
 
 %
 %% Exercise 2
@@ -68,4 +68,4 @@ Cubeplot(M');
 % Hint: use a letter 'r,e,p,q,v' to inform the function which are the
 %       input arguments. 
 %
-[ex2Test_rot_mat,ex2Test_roll,ex2Test_pitch,ex2Test_yaw,ex2Test_euler_axis,ex2Test_angle,ex2Test_quat,ex2Test_rot_vec] = exercise2(quatTest3);
+[ex2Test_rot_mat,ex2Test_roll,ex2Test_pitch,ex2Test_yaw,ex2Test_euler_axis,ex2Test_angle,ex2Test_quat,ex2Test_rot_vec] = exercise2(rotationVector);

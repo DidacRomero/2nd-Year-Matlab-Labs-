@@ -13,12 +13,24 @@ euler_axis = [0 0 0];
 angle = 0;
 quaternion = [0 0 0 0];
 rot_vec = [0 0 0];
+
+
 %Lets check what are we receiving in order to to the appropriate functions
 if(nargin == 1)
     %We are either receiving a rotation matrix, or a quaternion or a
     %rotation vector, let's check them
-    if(length(varargin{1}) == 4)
+    size_compare = size(varargin{1});
+    %Quaternion case
+    if(size_compare(1,1) == 4 && size_compare(1,2) == 1)
         quaternion = varargin{1};
+    
+    %Rotation Matrix case
+elseif(size_compare(1,1) == 3 && size_compare(1,2) == 3)
+        rot_mat = varargin{1};
+        
+elseif (size_compare(1,1) == 1 && size_compare(1,2) == 3)
+        rot_vec = varargin{1};
+        
     end
     
 elseif(nargin == 2)
