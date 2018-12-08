@@ -29,6 +29,30 @@ M = [    -1  -1 1;   %Node 1
 % rotated by the attitude encoded in the quaternion using quaternion
 % multiplications.
 % Test it an argument/demonstrate why your function is well implemented.
+quat_1 = [1 0 1 0];
+vec_1 = [1 0 1];
+
+vec_rotated = vecQuatRot(vec_1,quat_1);
+vec_rotated = [0 vec_rotated];
+
+[euler_axis_1,angle_1] = quaternionToEulerAxisAngle(vec_rotated);
+Rot_Matrix_1 = AxisAngleToRotMatrix(euler_axis_1,rad2deg(angle_1));
+%We plot the base cube and the rotation after that
+Cubeplot(M');
+N = Rot_Matrix_1 * M;
+Cubeplot(N');
+
+
+%The multiplication function works properly because the vector is rotated,
+%as it should, this would be impossible if the quaternion multiplication function didn't work as it should.
+%Also, the result of multiplying 2 quaternions is diferent for quaternion1 * quaternion2
+%and quaternion2 * quaternion1 (you can check it if you want)
+
+%The Rotation function is well implemented because if we use the vector
+%returned by the vectorQuaternion multiplication as a quaternion and we
+%extract the axis and the angle we can construct the rotation matrix. 
+%With said matrix we can see that the cube is rotated as in the vector
+%passed in the multiplication.
 
 
 %
@@ -37,7 +61,7 @@ M = [    -1  -1 1;   %Node 1
 testMat = AxisAngleToRotMatrix([0 0 1],90);
 %
 % *  Given a rotation matrix, returns the Euler rotation angles.
-[roll,pitch,yaw] = matRotToEulerAngles(testMat);
+[pitch,roll,yaw] = matRotToEulerAngles(testMat);
 % *  Given a rotation matrix, returns the principal Euler axis/angle.
 [euler_axis,angle] = rotMatToEulerAxisAngle(testMat);
 % *  Given principal Euler axis/angle, returns the quaternion.
@@ -68,4 +92,3 @@ rotationVector = eulerAxisAngleToRotationVector(euler_axis,angle);
 % Hint: use a letter 'r,e,p,q,v' to inform the function which are the
 %       input arguments. 
 %
-[ex2Test_rot_mat,ex2Test_roll,ex2Test_pitch,ex2Test_yaw,ex2Test_euler_axis,ex2Test_angle,ex2Test_quat,ex2Test_rot_vec] = exercise2(test_euler_axis,test_angle);
