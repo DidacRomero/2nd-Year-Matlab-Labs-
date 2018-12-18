@@ -29,6 +29,7 @@ M = [    -1  -1 1;   %Node 1
 % rotated by the attitude encoded in the quaternion using quaternion
 % multiplications.
 % Test it an argument/demonstrate why your function is well implemented.
+disp('Exercise 0:')
 quat_1 = [1 0 1 0];
 vec_1 = [1 0 1];
 
@@ -36,11 +37,12 @@ vec_rotated = vecQuatRot(vec_1,quat_1);
 vec_rotated = [0 vec_rotated];
 
 [euler_axis_1,angle_1] = quaternionToEulerAxisAngle(vec_rotated);
-Rot_Matrix_1 = AxisAngleToRotMatrix(euler_axis,rad2deg(angle_1));
+Rot_Matrix_1 = AxisAngleToRotMatrix(euler_axis_1,rad2deg(angle_1));
 %We plot the base cube and the rotation after that
 Cubeplot(M');
 N = Rot_Matrix_1 * M;
 Cubeplot(N');
+disp('Plotted Exercise 0 demonstration cubes.')
 
 
 %The multiplication function works properly because the vector is rotated,
@@ -57,6 +59,7 @@ Cubeplot(N');
 
 %
 %% Exercise 1
+disp('Exercise 1');
 % Create functions that:
 testMat = AxisAngleToRotMatrix([0 0 1],90);
 %
@@ -92,3 +95,56 @@ rotationVector = eulerAxisAngleToRotationVector(euler_axis,angle);
 % Hint: use a letter 'r,e,p,q,v' to inform the function which are the
 %       input arguments. 
 %
+
+
+disp('Exercise 2:');
+disp('---------------------');
+disp('---------------------');
+
+%We use some previous data to run the tests for the functions.
+
+%You can read the help of the function to use it for different tests. A
+%basic test is provided and the others are commented, uncomment just 1 case
+%to see it, if more than 1 case is uncommented you will only see the
+%displays for the last uncommented test
+
+%Rotation Matrix
+[rot_mat,ex2_pitch,ex2_roll,ex2_yaw,euler_axis,angle,quaternion,rot_vec] = exercise2(testMat);
+%Quaternion
+%[rot_mat,ex2_pitch,ex2_roll,ex2_yaw,euler_axis,angle,quaternion,rot_vec] = exercise2(quatTest3);
+%Rotation vecttor
+%[rot_mat,ex2_pitch,ex2_roll,ex2_yaw,euler_axis,angle,quaternion,rot_vec] = exercise2(rotationVector);
+%EulerAxis/Angle
+%[rot_mat,ex2_pitch,ex2_roll,ex2_yaw,euler_axis,angle,quaternion,rot_vec] = exercise2(test_euler_axis,test_angle);
+%Euler Angles pitch roll yaw
+%[rot_mat,ex2_pitch,ex2_roll,ex2_yaw,euler_axis,angle,quaternion,rot_vec] = exercise2(pitch,roll,yaw);
+
+
+disp('Exercise 2 function returned:');
+disp('Rotation Matrix (rot_mat):');
+disp(rot_mat);
+disp('---------------------');
+
+disp('Euler Axis (euler_axis):');
+disp(euler_axis);
+disp('Angle (angle):');
+disp(angle);
+disp('---------------------');
+
+disp('Pitch (ex2_pitch):');
+disp(ex2_pitch);
+disp('Roll (ex2_roll):');
+disp(ex2_roll);
+disp('Yaw (ex_2yaw):');
+disp(ex2_yaw);
+disp('---------------------');
+
+disp('Quaternion (quaternion):');
+disp(quaternion);
+disp('---------------------');
+
+disp('Rotation vector (rot_vec):');
+disp(rot_vec);
+disp('---------------------');
+
+

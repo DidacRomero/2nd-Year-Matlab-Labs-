@@ -18,6 +18,7 @@ if (testFlag==0)
         %for some angles Matlab seems to return 1.0000 on determinants for
         %angles between 120º and 180º.
         % And for some Reason Matlab says that 1.0000 is not the same as 1 ¯\_(?)_/¯
+        disp('Rotation Matrix determinant = 1');
     else %If det~= 1
         testFlag = -1;
         disp("ERROR: Determinant diferent than 1");
@@ -28,6 +29,8 @@ if (testFlag==0)
     if (auxTransMat ~= inv(rotMat))
          testFlag = -1;
          disp("ERROR: Transpose of the RotationMatrix is different than the inverse");
+    else
+        disp('Transpose of the RotationMatrix is equal to its inverse');
     end
     
     %   - Observe what happens to a vector parallel to the axis direction

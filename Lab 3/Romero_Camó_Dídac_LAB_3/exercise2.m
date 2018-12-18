@@ -38,6 +38,7 @@ elseif(nargin == 1)
     if(size_compare == size(quaternion))
         quaternion = varargin{1};
     
+        disp('-Function received a quaternion');
     [euler_axis,angle] = quaternionToEulerAxisAngle(quaternion);
     rot_mat = AxisAngleToRotMatrix(euler_axis,angle);
   
@@ -45,13 +46,13 @@ elseif(nargin == 1)
     %Check if the dimensions of the input are correct
 elseif(size_compare == size(rot_mat))
         rot_mat = varargin{1};
-        
+         disp('-Function received a Rotation Matrix');
     [euler_axis,angle] = rotMatToEulerAxisAngle(rot_mat);
     %-------------Rotation Vector case----------------   
     %Check if the dimensions of the input are correct
 elseif (size_compare == size(rot_vec))
         rot_vec = varargin{1};
-        
+         disp('-Function received a Rotation Vector');
     [euler_axis,angle] = rotationVectorToEulerAxisAngle(rot_vec);
     rot_mat = AxisAngleToRotMatrix(euler_axis,angle);
     else
@@ -82,6 +83,7 @@ elseif(nargin == 2)
    end
    
 if (error == 0)
+     disp('-Function received an euler Axis and Angle');
     %Apply the functions to get the values
     rot_mat = AxisAngleToRotMatrix(euler_axis,angle);
     quaternion = eulerAxisAngleToQuaternion(euler_axis,angle);
@@ -110,7 +112,7 @@ elseif(nargin == 3)
     else
         error = 1;
  end
-        
+         disp('-Function received pitch, roll, and yaw');
  rot_mat = eulerAnglesToRotMat(pitch,roll,yaw);
  [euler_axis,angle] = rotMatToEulerAxisAngle(rot_mat);
  quaternion = eulerAxisAngleToQuaternion(euler_axis,angle);

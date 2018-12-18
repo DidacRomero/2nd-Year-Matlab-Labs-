@@ -6,7 +6,8 @@
 %   - Ensure that the transpose operation is equivalent to the inverse
 %   - Observe what happens to a vector parallel to the axis direction
 %   - Observe what happens to a vector perpendicular to the axis direction
-
+clear all;
+clc;
 %Calculate the rotation using Rodrigues
 R = AxisAngleToRotMatrix([1 0 0],90);
 %Make the necessary tests
