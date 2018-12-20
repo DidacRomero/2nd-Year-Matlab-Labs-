@@ -91,18 +91,15 @@ rotMat_WC = auxRotMat_1 * auxRotMat_2;
 t_WC = cc;
 
 %If the camera has a focal length of 1/34 m:
-f = 1/34;
+
 % 3.1 Make a plot with the view of the points of the circle projected into the camera plane.
 
 %Pass the points from world to camera
-points = rotMat_WC * A + t_WC;
+p1 = rotMat_WC * A + t_WC;
 
 % 3.2 Make also a 3D plot where all the scene is drawn in the world
 % coordinates. The scene must contain the 2 reference frames (2 orthogonal sets of vectors)
 % and the circle points. You can use the provided function cameraproj.
-toPlot = cameraproj(1,f,A);
-
-plot(toPlot(1,:),toPlot(2,:));
 
 
 %% Exercise 4
