@@ -101,8 +101,11 @@ points = rotMat_WC * A + t_WC;
 % coordinates. The scene must contain the 2 reference frames (2 orthogonal sets of vectors)
 % and the circle points. You can use the provided function cameraproj.
 toPlot = cameraproj(1,f,A);
+toPlot_C = cameraproj(1,f,points);
 
 plot(toPlot(1,:),toPlot(2,:));
+hold on;
+plot(toPlot_C(1,:),toPlot_C(2,:));
 
 
 %% Exercise 4
