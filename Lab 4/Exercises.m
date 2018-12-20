@@ -5,6 +5,7 @@ p_A = [3, 4]';
 p_B = [-2.5, 0.5]';
 % on a frame B
 
+disp('Exercise 1:');
 %WE ASSUME
 ex1_o_A = [0 0]';
 
@@ -19,12 +20,22 @@ ex_1_t_A_to_B = p_B - ex1_rotMat_A_to_B * p_A;
 
 % 1.1 Which are the coordinates of the origin of A seen from B?
 ex1_oBA = ex1_rotMat_A_to_B * ex1_o_A + ex_1_t_A_to_B;
+
 % 1.2 Which are the coordinates of the origin of B seen from A? 
 %ASSUMINg the result above is ok
 ex1_oAB = ex1_o_A + ex_1_t_A_to_B;
+
 % 1.3 Which are the coordinates of a point q expressed in A if
 q_B = [3,1]'; %?
 ex_1_q_A = ex1_rotMat_B_to_A * q_B + ex_1_t_B_to_A;
+
+disp('Coordinates of A origin seen from B');
+disp(ex1_oBA);
+disp('Coordinates of B origin seen from A');
+disp(ex1_oAB);
+disp('Coordinates of q in A');
+disp(ex_1_q_A);
+
 
 %% Exercise 2
 
@@ -108,6 +119,7 @@ hold on;
 plot(toPlot_C(1,:),toPlot_C(2,:));
 
 
+
 %% Exercise 4
 
 %The columns of the next matrix, represents the coordinates od 4 points
@@ -130,15 +142,65 @@ wc = [4.665;3.735;-0.5395];
 %world frame -170 degs about the direction
 u = [0.01;-.2;1];
 
+%Rotation matrix from world to camera and viceversa
+ex4_RotMat_WC = AxisAngleToRotMatrix(u,-170);
+ex4_RotMat_CW = ex4_RotMat_WC';
+
+%Translation from World to Camera and viceversa xorld position in its frames is [0 0 0]
+oW= [0 0 0]';
+t_WC = -(ex4_RotMat_WC * oW) - wc; %%%%%RECHECK THIS
+
 
 % With the data provided determine:
 %
+
+%Vector 1 POINTS in world reference, so we don't change them
+p1_w = [A(1,1) A(2,1) A(3,1)];
+p2_w = [A(1,2) A(2,2) A(3,2)];
+
+p3_w = [A(1,3) A(2,3) A(3,3)];
+p4_w = [A(1,4) A(2,4) A(3,4)];
+
+vec1_w = p2_w - p1_w;
+
+vec2_w = p4_w - p3_w;
+
+
 % 4.1 The minimum angle that both segments forms (hint, they intersect)
 %
+
+vecMult = vec1_w.* vec2_w;
+
+angle = acos( sum(vecMult) / sqrt(sum(vec1_w.^2)) * sqrt(sum(vec2_w.^2)) );
+
+disp('Angle: ');
+disp(rad2deg(angle));
 % 4.2 The angle that both segments forms in the image plane
 %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%MUST FINISH
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%THIS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+angle = acos( sum(vecMult_2) / sqrt(sum(vec1_w.^2)) * sqrt(sum(vec2_w.^2)) );
+
+
 % 4.3 Deliver a 3D representation of the scene with all the coordinates
 % refered to the world frame
 %
+toPlot_3 = cameraproj(1,f,vec1_w');
+toPlot_4 = cameraproj(1,f,vec2_w');
+plot(toPlot_3);
+hold on;
+plot(toPlot_4);
+
 % 4.4 Deliver the 3D scene representations but with all the coordinates
 % refered to the camera frame
+
+p1_c = ex4_RotMat_WC * p1_w + t_WC;
+p2_c = ex4_RotMat_WC * p2_w + t_WC;
+p3_c = ex4_RotMat_WC * p3_w + t_WC;
+p4_c = ex4_RotMat_WC * p4_w + t_WC;
+
+vec1_c = p2_c - p1_c;
+
+vec2_c = p4_c - p3_c;
