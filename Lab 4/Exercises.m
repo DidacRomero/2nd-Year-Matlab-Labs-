@@ -166,11 +166,11 @@ t_WC = -(ex4_RotMat_WC * oW) - wc; %%%%%RECHECK THIS
 %
 
 %Vector 1 POINTS in world reference, so we don't change them
-p1_w = [A(1,1) A(2,1) A(3,1)];
-p2_w = [A(1,2) A(2,2) A(3,2)];
+p1_w = [A(1,1) A(2,1) A(3,1)]';
+p2_w = [A(1,2) A(2,2) A(3,2)]';
 
-p3_w = [A(1,3) A(2,3) A(3,3)];
-p4_w = [A(1,4) A(2,4) A(3,4)];
+p3_w = [A(1,3) A(2,3) A(3,3)]';
+p4_w = [A(1,4) A(2,4) A(3,4)]';
 
 vec1_w = p2_w - p1_w;
 
@@ -182,7 +182,7 @@ vec2_w = p4_w - p3_w;
 
 vecMult = vec1_w.* vec2_w;
 
-angle = acos( sum(vecMult) / sqrt(sum(vec1_w.^2)) * sqrt(sum(vec2_w.^2)) );
+angle = acos( dot(vec1_w,vec2_w) / (norm(vec1_w) * norm(vec2_w)) );
 
 disp('Angle: ');
 disp(rad2deg(angle));
@@ -200,8 +200,8 @@ disp(rad2deg(angle));
 %
 
 figure;
-toPlot_3 = cameraproj(1,f,vec1_w');
-toPlot_4 = cameraproj(1,f,vec2_w');
+toPlot_3 = cameraproj(1,f,vec1_w);
+toPlot_4 = cameraproj(1,f,vec2_w);
 plot(toPlot_3);
 hold on;
 plot(toPlot_4);
