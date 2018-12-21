@@ -99,7 +99,8 @@ cc = [1; 6; 1];
 auxRotMat_1 = AxisAngleToRotMatrix([0 1 0],-90);
 auxRotMat_2 = AxisAngleToRotMatrix([0 0 1],-20);
 
-rotMat_WC = auxRotMat_1 * auxRotMat_2;
+resultant_Rotation_1 = auxRotMat_1 * A;
+resultant_A = auxRotMat_2 * resultant_Rotation_1;
 %rotMat_CW = rotMat_WC';
 t_WC = cc;
 
@@ -108,17 +109,25 @@ f = 1/34;
 % 3.1 Make a plot with the view of the points of the circle projected into the camera plane.
 
 %Pass the points from world to camera
-points = rotMat_WC * A + t_WC;
+points = resultant_A + t_WC;
+
+figure;
+toPlot_C = cameraproj(1,f,points);
+plot(toPlot_C(1,:),toPlot_C(2,:));
+title('Exercise 3.1');
 
 % 3.2 Make also a 3D plot where all the scene is drawn in the world
 % coordinates. The scene must contain the 2 reference frames (2 orthogonal sets of vectors)
 % and the circle points. You can use the provided function cameraproj.
 toPlot = cameraproj(1,f,A);
-toPlot_C = cameraproj(1,f,points);
 
-plot(toPlot(1,:),toPlot(2,:));
+
+figure;
+plot3(A(1,:),A(2,:),A(3,:));
 hold on;
-plot(toPlot_C(1,:),toPlot_C(2,:));
+plot3(points(1,:),points(2,:),points(3,:));
+title('Exercise 3.2 3D Plot');
+
 
 
 
@@ -183,17 +192,20 @@ disp(rad2deg(angle));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%MUST FINISH
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%THIS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-angle = acos( sum(vecMult_2) / sqrt(sum(vec1_w.^2)) * sqrt(sum(vec2_w.^2)) );
+%angle = acos( sum(vecMult_2) / sqrt(sum(vec1_w.^2)) * sqrt(sum(vec2_w.^2)) );
 
 
 % 4.3 Deliver a 3D representation of the scene with all the coordinates
 % refered to the world frame
 %
+
+figure;
 toPlot_3 = cameraproj(1,f,vec1_w');
 toPlot_4 = cameraproj(1,f,vec2_w');
 plot(toPlot_3);
 hold on;
 plot(toPlot_4);
+title('Ex. 4.3');
 
 % 4.4 Deliver the 3D scene representations but with all the coordinates
 % refered to the camera frame
