@@ -157,6 +157,8 @@ u = [0.01;-.2;1];
 ex4_RotMat_WC = AxisAngleToRotMatrix(u,-170);
 ex4_RotMat_CW = ex4_RotMat_WC';
 
+A_inCamera = ex4_RotMat_WC * A +wc;
+
 %Translation from World to Camera and viceversa xorld position in its frames is [0 0 0]
 oW= [0 0 0]';
 t_WC = -(ex4_RotMat_WC * oW) - wc; %%%%%RECHECK THIS
@@ -180,32 +182,31 @@ vec2_w = p4_w - p3_w;
 % 4.1 The minimum angle that both segments forms (hint, they intersect)
 %
 
-vecMult = vec1_w.* vec2_w;
-
 angle = acos( dot(vec1_w,vec2_w) / (norm(vec1_w) * norm(vec2_w)) );
 
 disp('Angle: ');
 disp(rad2deg(angle));
+
 % 4.2 The angle that both segments forms in the image plane
 %
+toPlot_3 = cameraproj(1,f,vec1_w);
+toPlot_4 = cameraproj(1,f,vec2_w);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%MUST FINISH
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%THIS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+angle = acos( dot(toPlot_3,toPlot_4) / (norm(toPlot_3) * norm(toPlot_4)) );
 
-%angle = acos( sum(vecMult_2) / sqrt(sum(vec1_w.^2)) * sqrt(sum(vec2_w.^2)) );
-
+disp('Angle:');
+disp(rad2deg(angle));
 
 % 4.3 Deliver a 3D representation of the scene with all the coordinates
 % refered to the world frame
 %
 
 figure;
-toPlot_3 = cameraproj(1,f,vec1_w);
-toPlot_4 = cameraproj(1,f,vec2_w);
-plot(toPlot_3);
+plot3([A(1,1) A(1,2)],[A(2,1) A(2,2)],[A(3,1) A(3,2)],'r');
 hold on;
-plot(toPlot_4);
-title('Ex. 4.3');
+plot3([A(1,3) A(1,4)],[A(2,3) A(2,4)],[A(3,3) A(3,4)],'g');
+title('Exercise 4.3 3D Plot');
+
 
 % 4.4 Deliver the 3D scene representations but with all the coordinates
 % refered to the camera frame
@@ -218,3 +219,9 @@ p4_c = ex4_RotMat_WC * p4_w + t_WC;
 vec1_c = p2_c - p1_c;
 
 vec2_c = p4_c - p3_c;
+
+figure;
+plot3([A_inCamera(1,1) A_inCamera(1,2)],[A_inCamera(2,1) A_inCamera(2,2)],[A_inCamera(3,1) A_inCamera(3,2)],'r');
+hold on;
+plot3([A_inCamera(1,3) A_inCamera(1,4)],[A_inCamera(2,3) A_inCamera(2,4)],[A_inCamera(3,3) A_inCamera(3,4)],'g');
+title('Exercise 4.4 3D Plot');
